@@ -1,0 +1,44 @@
+syntax notes
+
+set $varname value #all values are stored as text
+
+unset $varname  #forgets that value
+
+lets go back to a room!
+
+
+look 	     #describes surroundings
+<direction>  #attempts to move in that direction
+take <object>
+drop <object>
+inventory
+inspect <object>
+
+# eventuallym we're back to the desk
+
+look
+sit chair #you hear a click
+open desk
+take key
+close desk
+stand up
+open door...
+
+
+inspect chair
+object "chair" is capable of:
+--inspect
+--sit
+--stand up
+
+inspect desk
+object "desk" is capable of:
+--inspect
+--open
+--close
+--put
+--place
+--take
+--get
+
+
