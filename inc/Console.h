@@ -30,7 +30,7 @@ class Console {
     @par Vars & Cmds: 
     These are both TokenMaps, one string:string, the other string::CmdCallback. Rather than
     write Console-level methods to wrap add/get/etc, we just expose these as 'public'
-    so they can be used directly.
+    so they can be called directly.
    */
   TokenMap<Token> Vars; ///< Variables (string::string map)
 
