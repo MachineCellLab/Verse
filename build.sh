@@ -1,15 +1,15 @@
 #!/bin/bash
 
-CFLAGS += "-Iinc"
+CFLAGS=" -Iinc -Iother/linenoise "
+
+#mkdir build
 
 gcc $CFLAGS -c other/linenoise/linenoise.c
 
 g++ $CFLAGS -c src/LineReader.cpp
 g++ $CFLAGS -c src/Shell.cpp
 
-# main test driver
-g++ $CFLAGS -c TestConsole.cpp
-
-#g++ $CFLAGS -o testConsole *.o TestConsole.cpp
+# build test app
+g++ $CFLAGS -o testConsole *.o src/TestConsole.cpp
 
 

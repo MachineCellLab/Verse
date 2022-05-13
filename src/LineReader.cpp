@@ -2,7 +2,7 @@
 
 #include "LineReader.h"
 
-#include "linenoise/linenoise.h"
+#include "linenoise.h"
 
 LineReader::LineReader() : prompt("READY:> "), tokenizerFunction(0){
   
