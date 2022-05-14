@@ -117,25 +117,25 @@ void InitConsole(testConsole& data) {
 
 void Set_Callback(testConsole& con, ArgsVector& argsVector) {
     if (argsVector[1] == "name") {
-        con.name = argsVector[2];
+      //con.name = argsVector[2];
     }
     else if (argsVector[1] == "version") {
-        con.version = stoi(argsVector[2]);
+      //con.version = stoi(argsVector[2]);
     }
     else {
-        std::cout << "usage: set (name | version)\n";
+      //std::cout << "usage: set (name | version)\n";
     }
 }
 
 void Print_Callback(testConsole& con, ArgsVector& argsVector) {
     if (argsVector[1] == "name") {
-        std::cout << con.name << endl;
+      //std::cout << con.name << endl;
     }
     else if (argsVector[1] == "version") {
-        std::cout << con.version << end;;
+      //std::cout << (int)con.version << end;;
     }
     else {
-        std::cout << "usage: print (name | version)\n";
+      //std::cout << "usage: print (name | version)\n";
     }
 }
 
@@ -181,8 +181,8 @@ void runConsoleInstance(void) {
 
     /* attach the callbacks 
     */
-    TestConsole.Cmds.setValue("set", Set_Callback);
-    TestConsole.Cmds.setValue("print", Print_Callback);
+    //TestConsole.Cmds.setValue("set", Set_Callback);
+    //TestConsole.Cmds.setValue("print", Print_Callback);
 }
 
 /**/
