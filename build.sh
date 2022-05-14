@@ -12,4 +12,3 @@ g++ $CFLAGS -c src/Shell.cpp
 # build test app
 g++ $CFLAGS -o console-test *.o test/TestConsole.cpp
 
-

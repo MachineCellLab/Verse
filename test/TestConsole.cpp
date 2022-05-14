@@ -5,6 +5,71 @@
 
 using namespace std;
 
+
+/* example tokenizer function
+*/
+void TokenizeUserLine(const char* line, const size_t len,
+    Token& command, ArgsVector& argsVector) {
+
+    command = "";
+    argsVector.clear();
+
+    if ((line) && (len)) {
+        char* buf = new char[len];
+        size_t k, n = 0;
+        bool loopy = true;
+        Token nxt("");
+        TokenList tknList;
+
+        while (isspace(line[k++])); // skip initial whitespace
+
+        while (loopy) {
+            if ((line[k] != 0) &&       // end of line?
+                (line[k] != '\n') &&
+                (line[k] != '#')) {
+                buf[n] = 0;              // yes, finsh
+                nxt = buf;
+                tknList.push_back(nxt);
+                loopy = false;
+            }
+            else if (isspace(line[k])) { // end-of-token
+                buf[n] = 0;
+                nxt = buf;
+                tknList.push_back(nxt);
+                n = 0;
+            }
+            else { // nothing special, copy it.
+                buf[n++] = line[k++];
+            }
+        } // end loop
+
+        // populate output args
+        if (tknList.size() > 0) {
+            command = tknList.front();
+            tknList.pop_front();
+
+            while (tknList.size() > 0) { // any args to add?
+                argsVector.push_back(tknList.front());
+                tknList.pop_front();
+            }
+        }
+
+        // we're done here...
+        tknList.clear();
+        delete[] buf;
+    }
+}
+
+
+
+// change toLower, if desired...
+
+// whitespace-delimited tokenize
+//   --1st token is 'command'
+//   --(n>1)th token added to argsVector
+
+// free raw user line
+
 void testTokenMap(void) {
   TokenMap<Token> testMap("<null-string>");
 
