@@ -129,7 +129,7 @@ void Set_Callback(testConsole& con, ArgsVector& argsVector) {
 
 void Print_Callback(testConsole& con, ArgsVector& argsVector) {
     if (argsVector[1] == "name") {
-        std::cout << con.name = endl;
+        std::cout << con.name << endl;
     }
     else if (argsVector[1] == "version") {
         std::cout << con.version << end;;
