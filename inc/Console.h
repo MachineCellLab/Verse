@@ -72,9 +72,8 @@ class Console {
       isRunning = true;
       while (isRunning) {
           Token command = "";
-          ArgsVector argsvector;
+          ArgsVector argsvector; argsvector.clear();
 
-          User.SetPrompt("READY:> ");
           User.GetTokenizedLine(command, argsvector);
           DispatchCmd(command, argsvector);
       }

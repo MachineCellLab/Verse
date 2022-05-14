@@ -34,6 +34,8 @@ void LineReader::GetRawLine(string& line) {
   char* noiseline = linenoise(prompt.c_str());
   line = noiseline;
   linenoiseFree(noiseline);
+
+  std::cout << prompt.c_str() << endl;
 }
 
 void LineReader::GetRawLine(char* line, size_t maxLineSize) {
@@ -60,8 +62,12 @@ void LineReader::GetTokenizedLine(Token& command, ArgsVector& argsVector) {
     string userLine = "";
     GetRawLine(userLine);
     
-    tokenizerFunction(userLine.c_str(), userLine.size(),
-		                command, argsVector);
+    if (tokenizerFunction) {
+        tokenizerFunction(userLine.c_str(), 
+                          userLine.size(),
+                          command, 
+                          argsVector);
+    }
   }
 }
 
