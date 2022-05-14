@@ -140,7 +140,7 @@ void Print_Callback(testConsole& con, const ArgsVector& argsVector) {
 }
 
 void Exit_Callback(testConsole& con, const ArgsVector& argsVector) {
-    con.Exit();
+    //con.Exit();
 }
 
 /*
@@ -183,10 +183,11 @@ void testConsoleInstance(void) {
 void runConsoleInstance(void) {
     Console<testConsole> TestConsole(InitConsole);
 
-    /* attach the callbacks 
+    /* attach the callbacks & kick it off...
     */
     TestConsole.Cmds.setValue("set", Set_Callback);
     TestConsole.Cmds.setValue("print", Print_Callback);
+    TestConsole.Run();
 }
 
 /**/

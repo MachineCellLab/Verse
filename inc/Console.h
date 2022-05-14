@@ -76,7 +76,7 @@ class Console {
 
           User.SetPrompt("READY:> ");
           User.GetTokenizedLine(command, argsvector);
-          User.DispatchCmd(command, argsvector);
+          DispatchCmd(command, argsvector);
       }
   };
 };
