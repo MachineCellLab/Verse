@@ -62,11 +62,15 @@ class Console {
   
   ~Console(){}; ///< Base destructor
 
-  // other ideas...
+  // runloop...
 
-  void Exit(void); ///< Exit the Console.
- 
-  void Run(void); ///< Begin Console run-loop.
+  void Exit(void) { ///< Exit the Console.
+      isRunning = false;
+  };
+
+  void Run(void) { ///< Begin Console run-loop.
+      isRunning = true;
+  };
 };
 
 #endif //_console_src_h_
