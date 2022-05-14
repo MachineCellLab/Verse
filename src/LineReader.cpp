@@ -61,16 +61,14 @@ void LineReader::GetTokenizedLine(Token& command, ArgsVector& argsVector) {
     GetRawLine(userLine);
     
     tokenizerFunction(userLine.c_str(), userLine.size(),
-		      command, argsVector);
+		                command, argsVector);
   }
 }
 
 /* example tokenizer function 
 */
-void TokenizeUserLine(const char* line,
-		      const size_t len,
-		      Token& command,
-		      ArgsVector& argsVector) {
+void TokenizeUserLine(const char* line, const size_t len,
+		               Token& command, ArgsVector& argsVector) {
 
   command = "";
   argsVector.clear();

@@ -10,6 +10,6 @@ g++ $CFLAGS -c src/LineReader.cpp
 g++ $CFLAGS -c src/Shell.cpp
 
 # build test app
-g++ $CFLAGS -o testConsole *.o test/TestConsole.cpp
+g++ $CFLAGS -o console-test *.o test/TestConsole.cpp
 
 
