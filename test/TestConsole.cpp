@@ -114,14 +114,29 @@ void InitConsole(testConsole& data) {
 }
   
 /** callbacks **/
-// Cmdcallback)(T& data, const ArgsVector& argsVector)
 
-void SetName_Callback(testConsole& con, ArgsVector& argsVector) {
-    con.name = argsVector[1];
+void Set_Callback(testConsole& con, ArgsVector& argsVector) {
+    if (argsVector[1] == "name") {
+        con.name = argsVector[2];
+    }
+    else if (argsVector[1] == "version") {
+        con.version = stoi(argsVector[2]);
+    }
+    else {
+        std::cout << "usage: set (name | version)\n";
+    }
 }
 
-void SetVersion_Callback(testConsole& con, ArgsVector& argsVector) {
-    con.version = argsVector[1];
+void Print_Callback(testConsole& con, ArgsVector& argsVector) {
+    if (argsVector[1] == "name") {
+        std::cout << con.name = endl;
+    }
+    else if (argsVector[1] == "version") {
+        std::cout << con.version << end;;
+    }
+    else {
+        std::cout << "usage: print (name | version)\n";
+    }
 }
 
 /*
@@ -161,12 +176,24 @@ void testConsoleInstance(void) {
 }
 
 /**/
+void runConsoleInstance(void) {
+    Console<testConsole> TestConsole(InitConsole);
+
+    /* attach the callbacks 
+    */
+    TestConsole.Cmds.setValue("set", Set_Callback);
+    TestConsole.Cmds.setValue("print", Print_Callback);
+}
+
+/**/
 int main (int argc, char* argv[]) {
   int rtn = 0;
   
   // testTokenMap();
 
   // testConsoleInstance();
+
+  runConsoleInstance();
 
   return rtn;
 }

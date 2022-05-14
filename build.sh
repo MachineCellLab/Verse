@@ -8,6 +8,7 @@ gcc $CFLAGS -c other/linenoise/linenoise.c
 
 g++ $CFLAGS -c src/LineReader.cpp
 g++ $CFLAGS -c src/Shell.cpp
+g++ $CFLAGS -c src/Console.cpp
 
 # build test app
 g++ $CFLAGS -o console-test *.o test/TestConsole.cpp
