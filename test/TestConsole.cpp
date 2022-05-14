@@ -113,6 +113,30 @@ void InitConsole(testConsole& data) {
   data.version = 1;
 }
   
+/** callbacks **/
+// Cmdcallback)(T& data, const ArgsVector& argsVector)
+
+void SetName_Callback(testConsole& con, ArgsVector& argsVector) {
+    con.name = argsVector[1];
+}
+
+void SetVersion_Callback(testConsole& con, ArgsVector& argsVector) {
+    con.version = argsVector[1];
+}
+
+/*
+    our toy syntax for this console test is:
+
+    set name <new-name> #sets the name
+
+    set version <new-version> #sets the version
+
+    print name
+
+    print version
+
+    exit
+*/
 
 /**/
 void testConsoleInstance(void) {
@@ -140,9 +164,9 @@ void testConsoleInstance(void) {
 int main (int argc, char* argv[]) {
   int rtn = 0;
   
-  testTokenMap();
+  // testTokenMap();
 
-  testConsoleInstance();
+  // testConsoleInstance();
 
   return rtn;
 }
