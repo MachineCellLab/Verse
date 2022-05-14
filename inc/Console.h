@@ -70,6 +70,14 @@ class Console {
 
   void Run(void) { ///< Begin Console run-loop.
       isRunning = true;
+      while (isRunning) {
+          Token command = "";
+          ArgsVector argsvector;
+
+          User.SetPrompt("READY:> ");
+          User.GetTokenizedLine(command, argsvector);
+          User.DispatchCmd(command, argsvector);
+      }
   };
 };
 

@@ -139,6 +139,10 @@ void Print_Callback(testConsole& con, const ArgsVector& argsVector) {
     }
 }
 
+void Exit_Callback(testConsole& con, const ArgsVector& argsVector) {
+    con.Exit();
+}
+
 /*
     our toy syntax for this console test is:
 
@@ -181,8 +185,8 @@ void runConsoleInstance(void) {
 
     /* attach the callbacks 
     */
-    TestConsole.Cmds.setValue("set", 0); //Set_Callback);
-    //TestConsole.Cmds.setValue("print", Print_Callback);
+    TestConsole.Cmds.setValue("set", Set_Callback);
+    TestConsole.Cmds.setValue("print", Print_Callback);
 }
 
 /**/
