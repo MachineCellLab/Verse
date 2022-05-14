@@ -26,7 +26,7 @@ class TokenMap
   */
   bool hasValue(const Token& tkn) { return (mapping.count(tkn) > 0); };
   
-  void setValue(const Token& tkn, T& item) { mapping[tkn] = item; };
+  void setValue(const Token& tkn, const T& item) { mapping[tkn] = item; };
 
   void unsetValue(const Token& tkn) {
     if (hasValue(tkn)) {

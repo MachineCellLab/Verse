@@ -115,7 +115,7 @@ void InitConsole(testConsole& data) {
   
 /** callbacks **/
 
-void Set_Callback(testConsole& con, ArgsVector& argsVector) {
+void Set_Callback(testConsole& con, const ArgsVector& argsVector) {
     if (argsVector[1] == "name") {
       //con.name = argsVector[2];
     }
@@ -127,7 +127,7 @@ void Set_Callback(testConsole& con, ArgsVector& argsVector) {
     }
 }
 
-void Print_Callback(testConsole& con, ArgsVector& argsVector) {
+void Print_Callback(testConsole& con, const ArgsVector& argsVector) {
     if (argsVector[1] == "name") {
       //std::cout << con.name << endl;
     }
@@ -181,7 +181,7 @@ void runConsoleInstance(void) {
 
     /* attach the callbacks 
     */
-    //TestConsole.Cmds.setValue("set", Set_Callback);
+    TestConsole.Cmds.setValue("set", 0); //Set_Callback);
     //TestConsole.Cmds.setValue("print", Print_Callback);
 }
 
