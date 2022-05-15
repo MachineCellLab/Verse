@@ -3,6 +3,7 @@
 #define _console_src_h_
 
 #include <cstring>
+#include <iostream>
 
 #include "TokenMap.h"
 #include "LineReader.h"

@@ -22,12 +22,10 @@ void LineReader::Clear(void) {
 
 void LineReader::SetPrompt(const string& newPrompt) {
   prompt = newPrompt;
-  std::cout << "prompt set to: " << prompt << endl;
 }
 
 void LineReader::SetPrompt(const char* newPrompt) {
   prompt = newPrompt;
-  std::cout << "prompt set to: " << prompt << endl;
 }
 
 void LineReader::SetTokenizerFunction(TokenizerFunction tkfn) {
@@ -39,14 +37,12 @@ void LineReader::GetRawLine(string& line) {
 
   line = noiseline;
   linenoiseFree(noiseline);
-
-  std::cout << "RPT" << prompt << endl;
 }
 
 void LineReader::GetRawLine(char* line, size_t maxLineSize) {
   char* noiseline = linenoise(prompt.c_str());
   int k;
-  std::cout << prompt.c_str() << endl;
+
   while ((line[k] != '\n') &&
 	 (line[k] != 0) &&
 	 (k < maxLineSize)) {
@@ -65,8 +61,11 @@ void LineReader::GetSecretLine(string& line) {
 void LineReader::GetTokenizedLine(Token& command, ArgsVector& argsVector) {
   if (tokenizerFunction) {
     string userLine = "";
+    command = "";
+    argsVector.clear();
+
     GetRawLine(userLine);
-      std::cout << prompt.c_str() << endl;
+    
     if (tokenizerFunction) {
         tokenizerFunction(userLine.c_str(), 
                           userLine.size(),
