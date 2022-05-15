@@ -48,10 +48,13 @@ class Console {
 
   const T& PeekData(void){ return (const T&)data; }; ///< access Console Data (read only)
 
-  void DispatchCmd(const Token& cmd, const ArgsVector& argsVector) { ///< Dispatch user commen
+  void DispatchCmd(const Token& cmd, const ArgsVector& argsVector) { ///< Dispatch user command
     if (CmdCallback cbk = Cmds.getValue(cmd)) {
-	cbk(data, argsVector);
+	    cbk(data, argsVector);
       }
+    else {
+        std::cout << "CONSOLE:: INVALID COMMAND: " << cmd << endl;
+    }
   };
 
  Console() : Vars("<null-variable>"), Cmds(NULL), isRunning(false){ }; ///< base constructor
@@ -77,19 +80,16 @@ class Console {
       Token rawline = "";
       
       ArgsVector argsvector; argsvector.clear();
-      
-      // User.GetRawLine(rawline);
-      // std::cout << "User entered: " << rawline << endl;
-      
+        
       User.GetTokenizedLine(command, argsvector);
-      
+      /*
       std::cout << "command is: " << command << endl;
       
       for (int k = 0; k < argsvector.size(); k++) {
-	std::cout << "argv[" << k <<"] is: " << argsvector[k] << endl;
-      }
+	            std::cout << "argv[" << k <<"] is: " << argsvector[k] << endl;
+      }*/
       
-      //DispatchCmd(command, argsvector);
+      DispatchCmd(command, argsvector);
     }
   };
 };
