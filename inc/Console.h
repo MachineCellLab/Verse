@@ -70,12 +70,18 @@ class Console {
 
   void Run(void) { ///< Begin Console run-loop.
       isRunning = true;
+
       while (isRunning) {
           Token command = "";
+          Token rawline = "";
+
           ArgsVector argsvector; argsvector.clear();
 
-          User.GetTokenizedLine(command, argsvector);
-          DispatchCmd(command, argsvector);
+          User.GetRawLine(rawline);
+          std::cout << "User entered: " << rawline << endl;
+
+          //User.GetTokenizedLine(command, argsvector);
+          //DispatchCmd(command, argsvector);
       }
   };
 };

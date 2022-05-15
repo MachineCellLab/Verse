@@ -187,6 +187,7 @@ void runConsoleInstance(void) {
     */
     TestConsole.Cmds.setValue("set", Set_Callback);
     TestConsole.Cmds.setValue("print", Print_Callback);
+    TestConsole.User.SetPrompt("READY:> ");
     TestConsole.Run();
 }
 
