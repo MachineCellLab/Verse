@@ -78,13 +78,17 @@ class Console {
 
           ArgsVector argsvector; argsvector.clear();
 
-          User.GetRawLine(rawline);
-          std::cout << "User entered: " << rawline << endl;
+          // User.GetRawLine(rawline);
+          // std::cout << "User entered: " << rawline << endl;
 
           User.GetTokenizedLine(command, argsvector);
+
           std::cout << "command is: " << command << endl;
-          std::cout << "argv[0] is: " << argsvector[0] << endl;
-          std::cout << "argv[1] is: " << argsvector[1] << endl;
+
+          //for (int k = 0; k < argsvector.size; k++) {
+            //  std::cout << "argv[" << k <<"] is: " << argsvector[k] << endl;
+          //}
+          
             
           //DispatchCmd(command, argsvector);
       }

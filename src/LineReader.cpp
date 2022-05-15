@@ -66,6 +66,7 @@ void LineReader::GetTokenizedLine(Token& command, ArgsVector& argsVector) {
     argsVector.clear();
 
     GetRawLine(userLine);
+    std::cout << "userLine is: " << userLine << endl;
     
     if (tokenizerFunction) {
         tokenizerFunction(userLine.c_str(), 

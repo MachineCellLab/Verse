@@ -9,19 +9,28 @@ using namespace std;
 /* example tokenizer function
 */
 void TokenizeUserLine(const char* line, const size_t len,
-    Token& command, ArgsVector& argsVector) {
+                       Token& command, ArgsVector& argsVector) {
 
     command = "";
     argsVector.clear();
 
+
     if ((line) && (len)) {
         char* buf = new char[len];
-        size_t k, n = 0;
+
+        size_t k = 0; 
+        size_t n = 0;
+
         bool loopy = true;
+
         Token nxt("");
         TokenList tknList;
 
-        while (isspace(line[k++])); // skip initial whitespace
+        std::cout << "TokenizerUserLine(): tokenizing " << line << endl;
+
+        while (isspace(line[k++]) && (k<len)); // skip initial whitespace
+
+        std::cout << "TokenizerUserLine(): initial whitespace skipped\n";
 
         while (loopy) {
             if ((line[k] != 0) &&       // end of line?
@@ -30,15 +39,23 @@ void TokenizeUserLine(const char* line, const size_t len,
                 buf[n] = 0;              // yes, finsh
                 nxt = buf;
                 tknList.push_back(nxt);
+                std::cout << "TokenizerUserLine(): pushed token: " << nxt << endl;
+
                 loopy = false;
+
+                std::cout << "TokenizerUserLine(): end of line detected\n";
             }
             else if (isspace(line[k])) { // end-of-token
                 buf[n] = 0;
                 nxt = buf;
                 tknList.push_back(nxt);
                 n = 0;
+
+                std::cout << "TokenizerUserLine(): pushed token: " << nxt << endl;
+                nxt = "";
             }
             else { // nothing special, copy it.
+                std::cout << "TokenizerUserLine(): copying char: " << line[k] << endl;
                 buf[n++] = line[k++];
             }
         } // end loop
