@@ -26,50 +26,59 @@ void TokenizeUserLine(const char* line, const size_t len,
         Token nxt("");
         TokenList tknList;
 
-        std::cout << "TokenizerUserLine(): tokenizing " << line << endl;
+        //std::cout << "TokenizerUserLine(): tokenizing " << line << endl;
 
-        while (isspace(line[k++]) && (k<len)); // skip initial whitespace
+        while (isspace(line[k]) && (k<len)) { k++; }; // skip initial whitespace
 
-        std::cout << "TokenizerUserLine(): initial whitespace skipped\n";
+        //std::cout << "TokenizerUserLine(): initial whitespace skipped, ";
+	//std::cout << "first letter is: " << line[k] << endl;
 
-        while (loopy) {
-            if ((line[k] != 0) &&       // end of line?
-                (line[k] != '\n') &&
-                (line[k] != '#')) {
-                buf[n] = 0;              // yes, finsh
-                nxt = buf;
-                tknList.push_back(nxt);
-                std::cout << "TokenizerUserLine(): pushed token: " << nxt << endl;
+        while (loopy)
+	  {
+	  if ((line[k] == 0) ||
+	      (line[k] == '\n') ||
+	      (line[k] == '#'))
+	    {
+	      //std::cout << "Tknizer END OF LINE\n";
 
-                loopy = false;
+	      if (n > 0) // add whatever token we were composing
+		{
+		  buf[n] = 0;
+		  nxt = buf;
+		  tknList.push_back(nxt);
+		  //std::cout << "TokenizerUserLine(): pushed last token: " << nxt << endl;
+		}
 
-                std::cout << "TokenizerUserLine(): end of line detected\n";
-            }
-            else if (isspace(line[k])) { // end-of-token
+	      loopy = false;
+	    }
+	  else if (isspace(line[k])) // end-of-token
+	    { 
                 buf[n] = 0;
                 nxt = buf;
                 tknList.push_back(nxt);
-                n = 0;
+                n = 0; k++;
 
-                std::cout << "TokenizerUserLine(): pushed token: " << nxt << endl;
+                //std::cout << "TokenizerUserLine(): pushed token: " << nxt << endl;
                 nxt = "";
             }
             else { // nothing special, copy it.
-                std::cout << "TokenizerUserLine(): copying char: " << line[k] << endl;
+	      //std::cout << "TokenizerUserLine(): copying char: " << line[k] << endl;
                 buf[n++] = line[k++];
             }
         } // end loop
 
         // populate output args
-        if (tknList.size() > 0) {
-            command = tknList.front();
-            tknList.pop_front();
+        if (tknList.size() > 0)
+	  {
+	    command = tknList.front();
+	    tknList.pop_front();
 
-            while (tknList.size() > 0) { // any args to add?
-                argsVector.push_back(tknList.front());
+	    while (tknList.size() > 0) // any args to add?
+	      { 
+		argsVector.push_back(tknList.front());
                 tknList.pop_front();
-            }
-        }
+	      }
+	  }
 
         // we're done here...
         tknList.clear();

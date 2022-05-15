@@ -70,28 +70,27 @@ class Console {
   };
 
   void Run(void) { ///< Begin Console run-loop.
-      isRunning = true;
-
-      while (isRunning) {
-          Token command = "";
-          Token rawline = "";
-
-          ArgsVector argsvector; argsvector.clear();
-
-          // User.GetRawLine(rawline);
-          // std::cout << "User entered: " << rawline << endl;
-
-          User.GetTokenizedLine(command, argsvector);
-
-          std::cout << "command is: " << command << endl;
-
-          //for (int k = 0; k < argsvector.size; k++) {
-            //  std::cout << "argv[" << k <<"] is: " << argsvector[k] << endl;
-          //}
-          
-            
-          //DispatchCmd(command, argsvector);
+    isRunning = true;
+    
+    while (isRunning) {
+      Token command = "";
+      Token rawline = "";
+      
+      ArgsVector argsvector; argsvector.clear();
+      
+      // User.GetRawLine(rawline);
+      // std::cout << "User entered: " << rawline << endl;
+      
+      User.GetTokenizedLine(command, argsvector);
+      
+      std::cout << "command is: " << command << endl;
+      
+      for (int k = 0; k < argsvector.size(); k++) {
+	std::cout << "argv[" << k <<"] is: " << argsvector[k] << endl;
       }
+      
+      //DispatchCmd(command, argsvector);
+    }
   };
 };
 
