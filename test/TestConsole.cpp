@@ -88,14 +88,6 @@ void TokenizeUserLine(const char* line, const size_t len,
 
 
 
-// change toLower, if desired...
-
-// whitespace-delimited tokenize
-//   --1st token is 'command'
-//   --(n>1)th token added to argsVector
-
-// free raw user line
-
 void testTokenMap(void) {
   TokenMap<Token> testMap("<null-string>");
 
@@ -142,31 +134,43 @@ void InitConsole(testConsole& data) {
 /** callbacks **/
 
 void Set_Callback(testConsole& con, const ArgsVector& argsVector) {
-    if (argsVector[1] == "name") {
-      con.name = argsVector[2];
+  if (argsVector.size() == 2) {
+    if (argsVector[0] == "name") {
+      con.name = argsVector[1];
     }
-    else if (argsVector[1] == "version") {
-      con.version = stoi(argsVector[2]);
+    else if (argsVector[0] == "version") {
+      con.version = stoi(argsVector[1]);
     }
     else {
       std::cout << "usage: set (name | version)\n";
     }
+  }
+  else {
+    std::cout << "usage: set (name | version)\n";
+  }
 }
 
 void Print_Callback(testConsole& con, const ArgsVector& argsVector) {
-    if (argsVector[1] == "name") {
+  if (argsVector.size() == 1) {
+    if (argsVector[0] == "name") {
       std::cout << con.name << endl;
     }
-    else if (argsVector[1] == "version") {
-      std::cout << (int)con.version << end;;
+    else if (argsVector[0] == "version") {
+      std::cout << con.version << endl;
     }
     else {
       std::cout << "usage: print (name | version)\n";
     }
+  }
+  else {
+    std::cout << "usage: print (name | version)\n";
+  }
 }
 
 void Exit_Callback(testConsole& con, const ArgsVector& argsVector) {
     //con.Exit();
+  std:: cout << "Exiting.\n";
+  exit(0);
 }
 
 /*
@@ -213,6 +217,7 @@ void runConsoleInstance(void) {
     */
     TestConsole.Cmds.setValue("set", Set_Callback);
     TestConsole.Cmds.setValue("print", Print_Callback);
+    TestConsole.Cmds.setValue("exit", Exit_Callback);
 
     TestConsole.User.SetTokenizerFunction(TokenizeUserLine);
 
