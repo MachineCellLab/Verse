@@ -22,10 +22,12 @@ void LineReader::Clear(void) {
 
 void LineReader::SetPrompt(const string& newPrompt) {
   prompt = newPrompt;
+  std::cout << "prompt set to: " << prompt << endl;
 }
 
 void LineReader::SetPrompt(const char* newPrompt) {
   prompt = newPrompt;
+  std::cout << "prompt set to: " << prompt << endl;
 }
 
 void LineReader::SetTokenizerFunction(TokenizerFunction tkfn) {
@@ -37,7 +39,7 @@ void LineReader::GetRawLine(string& line) {
   //line = noiseline;
   //linenoiseFree(noiseline);
 
-  std::cout << prompt.c_str() << endl;
+  std::cout << prompt << endl;
 }
 
 void LineReader::GetRawLine(char* line, size_t maxLineSize) {
