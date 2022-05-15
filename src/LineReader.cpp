@@ -35,11 +35,12 @@ void LineReader::SetTokenizerFunction(TokenizerFunction tkfn) {
 }
 
 void LineReader::GetRawLine(string& line) {
-  //char* noiseline = linenoise(prompt.c_str());
-  //line = noiseline;
-  //linenoiseFree(noiseline);
+  char* noiseline = linenoise(prompt.c_str());
 
-  std::cout << prompt << endl;
+  line = noiseline;
+  linenoiseFree(noiseline);
+
+  std::cout << "RPT" << prompt << endl;
 }
 
 void LineReader::GetRawLine(char* line, size_t maxLineSize) {
