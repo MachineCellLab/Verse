@@ -61,6 +61,7 @@ void LineReader::GetSecretLine(string& line) {
 void LineReader::GetTokenizedLine(Token& command, ArgsVector& argsVector) {
   if (tokenizerFunction) {
     string userLine = "";
+
     command = "";
     argsVector.clear();
 
