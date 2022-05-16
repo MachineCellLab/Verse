@@ -72,9 +72,9 @@ class Console {
 
   const CmdCallbackEntry nullCmdEntry = {"<null-cmd>", "none", "none", 0, 0, NULL};
 
- Console() : Vars("<null-variable>"), Cmds(NULL), isRunning(false){ }; ///< base constructor
+ Console() : Vars("<null-variable>"), Cmds(nullCmdEntry), isRunning(false){ }; ///< base constructor
 
- Console(DataCallback initCallback) : Vars("<null-variable>"), Cmds(NULL), isRunning(false)
+ Console(DataCallback initCallback) : Vars("<null-variable>"), Cmds(nullCmdEntry), isRunning(false)
     { ///< callback constructor
       if (initCallback) { initCallback(data); }
     };
