@@ -217,7 +217,7 @@ void runConsoleInstance(void) {
     */
     TestConsole.AddCallbackEntry("set",   Set_Callback, "set name or version", "set (name | version) <value>", 2, 2);
     TestConsole.AddCallbackEntry("print", Print_Callback, "print name or version", "print (name | version)", 1, 1);
-    TestConsole.AddCallbackEntry("print", Exit_Callback, "exit this featureful computer program...", "exit [status]", 0, 1);
+    TestConsole.AddCallbackEntry("exit",  Exit_Callback, "exit this featureful computer program...", "exit [status]", 0, 1);
 
     TestConsole.User.SetTokenizerFunction(TokenizeUserLine);
 

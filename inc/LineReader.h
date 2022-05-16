@@ -36,6 +36,7 @@ class LineReader {
  private:
   string     prompt;
   TokenizerFunction tokenizerFunction;
+  string prevUserLine;
 };
 
 #endif //_console_linereader_h_

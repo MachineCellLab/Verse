@@ -34,7 +34,7 @@ class TokenMap
     }
   };
 
-  const T& null(void) { return (const)nullItem; };
+  const T& null(void) { return nullItem; };
   
   const T& getValue(const Token& tkn) {
     if (hasValue(tkn)) {
