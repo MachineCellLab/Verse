@@ -22,6 +22,13 @@ class Console {
   typedef void(*DataArgCallback)(T& data, void* arg);
 
   typedef void(*PeekCallback)(const T& data);
+
+  typedef struct CmdCallbackEntry {
+      Token cmd;
+      string usage, description;
+      uint8_t minArgs, maxArgs;
+      CmdCallback callback;
+  } CmdCallbackEntry;
   
  protected:
   T data;
@@ -35,7 +42,7 @@ class Console {
    */
   TokenMap<Token> Vars; ///< Variables (string::string map)
 
-  TokenMap<CmdCallback> Cmds; ///< Commands (string::callback map)
+  TokenMap<CmdCallbackEntry> Cmds; ///< Commands (string::callback-entry map)
 
   LineReader User; ///< User Text interface (linenoise implementation).
 
@@ -49,11 +56,17 @@ class Console {
   const T& PeekData(void){ return (const T&)data; }; ///< access Console Data (read only)
 
   void DispatchCmd(const Token& cmd, const ArgsVector& argsVector) { ///< Dispatch user command
-    if (CmdCallback cbk = Cmds.getValue(cmd)) {
-	    cbk(data, argsVector);
+    if (CmdCallbackEntry cbkEntry = Cmds.getValue(cmd)) {
+        if ((argsVector.size() > cbkEntry.minArgs) &&
+            (argsVector.size() < cbkEntry.maxArgs) && cbkEntry.cbk) {
+            cbkEntry.cbk(data, argsVector);
+        }
+        else {
+            std::cerr << cbkEntry.usage << endl;
+        }
       }
     else {
-        std::cout << "CONSOLE:: INVALID COMMAND: " << cmd << endl;
+        std::cerr << "CONSOLE:: INVALID COMMAND: " << cmd << endl;
     }
   };
 
@@ -72,22 +85,33 @@ class Console {
       isRunning = false;
   };
 
+
+  void AddCallbackEntry(const string& cmd, CmdCallback callback,
+      const string& description, const string& usage,
+      const uint8_t minArgs,
+      const uint8_t maxArgs)
+  {
+      CmdCallbackEntry newEntry;
+
+      newEntry.cmd = cmd;
+      newEntry.usage = usage;
+      newEntry.description = description;
+      newEntry.minArgs = minArgs;
+      newEntry.maxArgs = maxArgs;
+      newEntry.callback = callback;
+
+      this->Cmds.setValue(cmd, newEntry);
+  };
+
   void Run(void) { ///< Begin Console run-loop.
     isRunning = true;
     
     while (isRunning) {
       Token command = "";
       Token rawline = "";
-      
       ArgsVector argsvector; argsvector.clear();
         
       User.GetTokenizedLine(command, argsvector);
-      /*
-      std::cout << "command is: " << command << endl;
-      
-      for (int k = 0; k < argsvector.size(); k++) {
-	            std::cout << "argv[" << k <<"] is: " << argsvector[k] << endl;
-      }*/
       
       DispatchCmd(command, argsvector);
     }
