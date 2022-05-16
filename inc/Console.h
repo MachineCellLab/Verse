@@ -56,18 +56,18 @@ class Console {
   const T& PeekData(void){ return (const T&)data; }; ///< access Console Data (read only)
 
   void DispatchCmd(const Token& cmd, const ArgsVector& argsVector) { ///< Dispatch user command
-    if (CmdCallbackEntry cbkEntry = Cmds.getValue(cmd)) {
-        if ((argsVector.size() > cbkEntry.minArgs) &&
-            (argsVector.size() < cbkEntry.maxArgs) && cbkEntry.cbk) {
-            cbkEntry.cbk(data, argsVector);
-        }
-        else {
-            std::cerr << cbkEntry.usage << endl;
-        }
+      if (CmdCallbackEntry cbkEntry = Cmds.getValue(cmd)) {
+          if ((argsVector.size() >= cbkEntry.minArgs) &&
+              (argsVector.size() <= cbkEntry.maxArgs) && cbkEntry.cbk) {
+              cbkEntry.cbk(data, argsVector);
+          }
+          else {
+              std::cerr << cbkEntry.usage << endl;
+          }
       }
-    else {
-        std::cerr << "CONSOLE:: INVALID COMMAND: " << cmd << endl;
-    }
+      else {
+          std::cerr << "CONSOLE:: INVALID COMMAND: " << cmd << endl;
+      }
   };
 
  Console() : Vars("<null-variable>"), Cmds(NULL), isRunning(false){ }; ///< base constructor
