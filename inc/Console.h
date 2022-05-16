@@ -34,6 +34,8 @@ class Console {
   T data;
   
  public:
+     const CmdCallbackEntry nullCmdEntry = { "nop", "none", "none", 0, 0, NULL };
+
   /**
     @par Vars & Cmds: 
     These are both TokenMaps, one string:string, the other string::CmdCallback. Rather than
@@ -56,10 +58,11 @@ class Console {
   const T& PeekData(void){ return (const T&)data; }; ///< access Console Data (read only)
 
   void DispatchCmd(const Token& cmd, const ArgsVector& argsVector) { ///< Dispatch user command
-      if (CmdCallbackEntry cbkEntry = Cmds.getValue(cmd)) {
+      CmdCallbackEntry cbkEntry = Cmds.getValue(cmd);
+        if (cbkEntry.cmd != nullCmdEntry.cmd) {
           if ((argsVector.size() >= cbkEntry.minArgs) &&
-              (argsVector.size() <= cbkEntry.maxArgs) && cbkEntry.cbk) {
-              cbkEntry.cbk(data, argsVector);
+              (argsVector.size() <= cbkEntry.maxArgs) && cbkEntry.callback) {
+              cbkEntry.callback(data, argsVector);
           }
           else {
               std::cerr << cbkEntry.usage << endl;
@@ -70,7 +73,6 @@ class Console {
       }
   };
 
-  const CmdCallbackEntry nullCmdEntry = {"<null-cmd>", "none", "none", 0, 0, NULL};
 
  Console() : Vars("<null-variable>"), Cmds(nullCmdEntry), isRunning(false){ }; ///< base constructor
 

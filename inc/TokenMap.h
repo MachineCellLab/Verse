@@ -10,7 +10,7 @@ class TokenMap
 {
  private:
   std::map<Token, T> mapping;
-  T nullItem;
+  const T nullItem;
   
  protected:
     TokenMap();
@@ -33,6 +33,8 @@ class TokenMap
       mapping.erase(tkn);
     }
   };
+
+  const T& null(void) { return (const)nullItem; };
   
   const T& getValue(const Token& tkn) {
     if (hasValue(tkn)) {
